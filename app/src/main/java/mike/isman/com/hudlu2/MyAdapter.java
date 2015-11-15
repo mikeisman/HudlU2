@@ -14,6 +14,7 @@ import org.w3c.dom.Text;
  */
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private String[] mDataset;
+    public OnAdapterInteractionListener mListener;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -27,9 +28,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }
     }
 
+    public interface OnAdapterInteractionListener {
+        void onItemClicked(View view, int position);
+    }
+
     // Provide a suitable constructor (depends on the kind of dataset)
     public MyAdapter(Context context, String[] myDataset) {
         mDataset = myDataset;
+        mListener = (OnAdapterInteractionListener)context;
     }
 
     // Create new views (invoked by the layout manager)
@@ -45,11 +51,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.mTextView.setText(mDataset[position]);
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onItemClicked(v, position);
+            }
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)
