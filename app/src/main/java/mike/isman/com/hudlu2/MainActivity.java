@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnAdapt
                         .setAction("Action", null).show();
             }
         });
+
+        fetchLatestNews();
     }
 
     @Override
@@ -74,5 +76,9 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnAdapt
     @Override
     public void onItemClicked(View view, int position) {
         Snackbar.make(view, myDataset[position], Snackbar.LENGTH_SHORT).show();
+    }
+
+    public void fetchLatestNews() {
+
     }
 }
