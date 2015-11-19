@@ -1,5 +1,8 @@
 package mike.isman.com.hudlu2;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements MyAdapter.OnAdapterInteractionListener {
     private RecyclerView mRecyclerView;
@@ -79,6 +83,13 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnAdapt
     }
 
     public void fetchLatestNews() {
+        ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
 
+        if (networkInfo != null && networkInfo.isConnected()) {
+
+        } else {
+            Toast.makeText(getApplicationContext(), "You are not connected to the internet", Toast.LENGTH_SHORT).show();
+        }
     }
 }
