@@ -87,7 +87,8 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnAdapt
         NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
 
         if (networkInfo != null && networkInfo.isConnected()) {
-
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            Toast.makeText(getApplicationContext(), "Fetching latest news", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getApplicationContext(), "You are not connected to the internet", Toast.LENGTH_SHORT).show();
         }
