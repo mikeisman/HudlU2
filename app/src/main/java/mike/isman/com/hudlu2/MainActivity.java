@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnAdapt
                             Log.d("HudlU", error.getMessage());
                         }
                     });
+            requestQueue.add(request);
         } else {
             Toast.makeText(getApplicationContext(), "You are not connected to the internet", Toast.LENGTH_SHORT).show();
         }
