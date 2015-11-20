@@ -1,5 +1,7 @@
 package mike.isman.com.hudlu2.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**

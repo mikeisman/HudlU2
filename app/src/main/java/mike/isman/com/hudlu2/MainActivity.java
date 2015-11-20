@@ -16,6 +16,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+
+import mike.isman.com.hudlu2.models.MashableNews;
+import mike.isman.com.hudlu2.models.MashableNewsItem;
+
 public class MainActivity extends AppCompatActivity implements MyAdapter.OnAdapterInteractionListener {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -89,6 +100,22 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnAdapt
         if (networkInfo != null && networkInfo.isConnected()) {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             Toast.makeText(getApplicationContext(), "Fetching latest news", Toast.LENGTH_SHORT).show();
+
+            StringRequest request = new StringRequest(Request.Method.GET,
+                    "http://mashable.com/stories.json?hot_per_page=0&new_per_page=5&rising_per_page=0",
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            MashableNews news = new Gson().fromJson(response, MashableNews.class);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(getApplicationContext(), "An error occurred getting the latest news", Toast.LENGTH_SHORT).show();
+                            Log.d("HudlU", error.getMessage());
+                        }
+                    });
         } else {
             Toast.makeText(getApplicationContext(), "You are not connected to the internet", Toast.LENGTH_SHORT).show();
         }
