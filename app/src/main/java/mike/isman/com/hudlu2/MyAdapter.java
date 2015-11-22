@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -25,10 +26,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     // you provide access to all the views for a data item in a view holder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView mTextView;
+        public TextView titleTextView;
+        public TextView authorTextView;
+        public ImageView imageView;
         public ViewHolder(View v) {
             super(v);
-            mTextView = (TextView) v.findViewById(R.id.item_title);
+            titleTextView = (TextView) v.findViewById(R.id.item_title);
+            authorTextView = (TextView) v.findViewById(R.id.item_author);
+            imageView = (ImageView) v.findViewById(R.id.item_image);
         }
     }
 
@@ -58,7 +63,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.mTextView.setText(mDataset.get(position).title);
+        MashableNewsItem newsItem = mDataset.get(position);
+        holder.titleTextView.setText(newsItem.title);
+        holder.authorTextView.setText(newsItem.author);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

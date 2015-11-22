@@ -7,7 +7,7 @@
         <ImageView
             android:id="@+id/item_image"
             android:src="@drawable/icon_hudllogo"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -19,6 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textStyle="bold"
             android:text="Title" />
         <TextView
             android:id="@+id/item_author"
