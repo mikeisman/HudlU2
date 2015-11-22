@@ -106,7 +106,8 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnAdapt
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            MashableNews news = new Gson().fromJson(response, MashableNews.class);
+                            MashableNews mashableNews = new Gson().fromJson(response, MashableNews.class);
+                            Log.d("HudlU", mashableNews.newsItems.get(0).title);
                         }
                     },
                     new Response.ErrorListener() {
