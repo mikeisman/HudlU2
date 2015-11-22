@@ -1,12 +1,20 @@
 package mike.isman.com.hudlu2;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.w3c.dom.Text;
 
@@ -20,6 +28,7 @@ import mike.isman.com.hudlu2.models.MashableNewsItem;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<MashableNewsItem> mDataset;
     public OnAdapterInteractionListener mListener;
+    public RequestQueue mRequestQueue;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -45,6 +54,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public MyAdapter(Context context, List<MashableNewsItem> myDataset) {
         mDataset = myDataset;
         mListener = (OnAdapterInteractionListener)context;
+        mRequestQueue = Volley.newRequestQueue(context);
     }
 
     // Create new views (invoked by the layout manager)
@@ -72,6 +82,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 mListener.onItemClicked(v, position);
             }
         });
+        final ViewHolder finalHolder = holder;
+        ImageRequest imageRequest = new ImageRequest(newsItem.image, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap bitmap) {
+                finalHolder.imageView.setImageBitmap(bitmap);
+            }
+        }, 0, 0, ImageView.ScaleType.FIT_XY, null, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Log.e("Hudl U", volleyError.getMessage());
+            }
+        });
+        mRequestQueue.add(imageRequest);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
