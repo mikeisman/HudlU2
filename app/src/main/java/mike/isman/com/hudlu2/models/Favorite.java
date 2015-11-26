@@ -8,11 +8,11 @@ import io.realm.annotations.PrimaryKey;
  */
 public class Favorite extends RealmObject {
     @PrimaryKey
-    public String link;
+    private String link;
 
-    public String title;
-    public String author;
-    public String image;
+    private String title;
+    private String author;
+    private String image;
 
     public String getTitle() {
         return title;
