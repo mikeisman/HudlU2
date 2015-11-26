@@ -1,14 +1,17 @@
 package mike.isman.com.hudlu2.models;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by mike on 11/26/15.
  */
 public class Favorite extends RealmObject {
+    @PrimaryKey
+    public String link;
+
     public String title;
     public String author;
-    public String link;
     public String image;
 
     public String getTitle() {
