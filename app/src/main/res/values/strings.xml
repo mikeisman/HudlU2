@@ -5,4 +5,5 @@
     <string name="welcome_dialog_message">Welcome to the App!</string>
     <string name="dialog_title">HudlU Android</string>
     <string name="ok">OK</string>
+    <string name="favorite">Favorite</string>
 </resources>

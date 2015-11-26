@@ -18,6 +18,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="@string/favorite"
+            android:backgroundTint="white"
+            />
+
         <TextView
             android:id="@+id/item_title"
             android:layout_below="@+id/item_image"
