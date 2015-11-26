@@ -1,6 +1,9 @@
 package mike.isman.com.hudlu2;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -66,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnAdapt
         });
 
         fetchLatestNews();
+
+        showWelcomeDialog();
     }
 
     @Override
@@ -125,6 +130,28 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnAdapt
             requestQueue.add(request);
         } else {
             Toast.makeText(getApplicationContext(), "You are not connected to the internet", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void showWelcomeDialog() {
+        SharedPreferences preferences = getSharedPreferences("HudlUPrefs", Context.MODE_PRIVATE);
+        boolean firstRun = preferences.getBoolean("firstRun", true);
+
+        if (firstRun) {
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("firstRun", false);
+            editor.apply();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(R.string.welcome_dialog_message)
+                    .setTitle(R.string.dialog_title);
+            builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
         }
     }
 }

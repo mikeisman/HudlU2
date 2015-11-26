@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">HudlU2</string>
     <string name="action_settings">Settings</string>
+    <string name="welcome_dialog_message">Welcome to the App!</string>
+    <string name="dialog_title">HudlU Android</string>
+    <string name="ok">OK</string>
 </resources>
