@@ -3,6 +3,7 @@ package mike.isman.com.hudlu2;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -93,6 +94,8 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnAdapt
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_favorites) {
             Log.d("HudlU", "Favorites menu item clicked.");
+            Intent intent = new Intent(this, FavoritesActivity.class);
+            startActivity(intent);
             return true;
         }
 
