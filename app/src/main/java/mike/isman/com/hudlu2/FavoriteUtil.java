@@ -26,11 +26,13 @@ public class FavoriteUtil {
     public static void removeFavorite(Context context, MashableNewsItem newsItem) {
         Realm realm = Realm.getInstance(context);
 
+        realm.beginTransaction();
         RealmResults<Favorite> result = realm.where(Favorite.class)
                 .equalTo("link", newsItem.link)
                 .findAll();
 
         result.clear();
+        realm.commitTransaction();
     }
 
     public static boolean isFavorite(Context context, MashableNewsItem newsItem) {

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,20 +35,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
         public TextView titleTextView;
         public TextView authorTextView;
         public ImageView imageView;
+        public Button favoriteButton;
+
         public ViewHolder(View v) {
             super(v);
             titleTextView = (TextView) v.findViewById(R.id.item_title);
             authorTextView = (TextView) v.findViewById(R.id.item_author);
             imageView = (ImageView) v.findViewById(R.id.item_image);
+            favoriteButton = (Button) v.findViewById(R.id.button_favorite);
         }
     }
 
     public interface OnAdapterInteractionListener {
         void onItemClicked(View view, int position);
+        void onFavoriteClicked(int position);
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
@@ -82,6 +86,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 mListener.onItemClicked(v, position);
             }
         });
+        holder.favoriteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onFavoriteClicked(position);
+            }
+        });
+
         final ViewHolder finalHolder = holder;
         ImageRequest imageRequest = new ImageRequest(newsItem.image, new Response.Listener<Bitmap>() {
             @Override

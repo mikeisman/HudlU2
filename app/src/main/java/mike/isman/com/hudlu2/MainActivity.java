@@ -17,6 +17,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -101,6 +104,17 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnAdapt
         Snackbar.make(view, myDataset.get(position).author, Snackbar.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void onFavoriteClicked(int position) {
+        MashableNewsItem mashableNewsItem = myDataset.get(position);
+        boolean isFavorited = FavoriteUtil.isFavorite(this, mashableNewsItem);
+        if(isFavorited) {
+            FavoriteUtil.removeFavorite(this, mashableNewsItem);
+        } else {
+            FavoriteUtil.addFavorite(this, mashableNewsItem);
+        }
+    }
+
     public void fetchLatestNews() {
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
@@ -154,4 +168,26 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnAdapt
             dialog.show();
         }
     }
+
+    public void clickedFavorite(View view) {
+        RelativeLayout viewParentRow = (RelativeLayout)view.getParent();
+        /*
+
+        final int position = mRecyclerView.getChildLayoutPosition(viewParentRow);
+        MashableNewsItem mashableNewsItem = myDataset.get(position);
+
+        Button button = (Button)viewParentRow.getChildAt(1);
+
+        Button button = (Button)view;
+        final int position = mRecyclerView.getChildLayoutPosition(button);
+        MashableNewsItem mashableNewsItem = myDataset.get(position);
+
+
+        Log.d("Hudl U", "I clicked " + mashableNewsItem.title);
+        button.setText("Favorited");
+
+        viewParentRow.refreshDrawableState();
+        */
+    }
+
 }

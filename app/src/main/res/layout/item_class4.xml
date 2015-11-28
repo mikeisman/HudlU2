@@ -19,13 +19,14 @@
             android:layout_height="wrap_content"
             />
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/button_favorite"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:text="@string/favorite"
-            android:backgroundTint="white"
+            android:backgroundTint="@color/white"
+            android:onClick="clickedFavorite"
             />
 
         <TextView
