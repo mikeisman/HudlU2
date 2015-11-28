@@ -2,6 +2,8 @@ package mike.isman.com.hudlu2;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -21,6 +24,7 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
+import mike.isman.com.hudlu2.models.Favorite;
 import mike.isman.com.hudlu2.models.MashableNewsItem;
 
 /**
@@ -30,6 +34,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<MashableNewsItem> mDataset;
     public OnAdapterInteractionListener mListener;
     public RequestQueue mRequestQueue;
+    private Context mContext;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -51,7 +56,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     public interface OnAdapterInteractionListener {
         void onItemClicked(View view, int position);
-        void onFavoriteClicked(int position);
+        void onFavoriteClicked(View view, int position);
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
@@ -59,6 +64,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         mDataset = myDataset;
         mListener = (OnAdapterInteractionListener)context;
         mRequestQueue = Volley.newRequestQueue(context);
+        mContext = context;
     }
 
     // Create new views (invoked by the layout manager)
@@ -80,6 +86,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         MashableNewsItem newsItem = mDataset.get(position);
         holder.titleTextView.setText(newsItem.title);
         holder.authorTextView.setText(newsItem.author);
+
+        if (FavoriteUtil.isFavorite(mContext, newsItem)) {
+            holder.favoriteButton.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorAccent));
+            holder.favoriteButton.setTextColor(Color.WHITE);
+        } else {
+            holder.favoriteButton.setBackgroundColor(Color.WHITE);
+            holder.favoriteButton.setTextColor(Color.BLACK);
+        }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +104,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.favoriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onFavoriteClicked(position);
+                mListener.onFavoriteClicked(v, position);
             }
         });
 

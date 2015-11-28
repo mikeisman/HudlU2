@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnAdapt
     }
 
     @Override
-    public void onFavoriteClicked(int position) {
+    public void onFavoriteClicked(View view, int position) {
         MashableNewsItem mashableNewsItem = myDataset.get(position);
         boolean isFavorited = FavoriteUtil.isFavorite(this, mashableNewsItem);
         if(isFavorited) {
