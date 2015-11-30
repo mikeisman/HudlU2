@@ -6,4 +6,5 @@
     <string name="dialog_title">HudlU Android</string>
     <string name="ok">OK</string>
     <string name="favorite">Favorite</string>
+    <string name="favorites">Favorites</string>
 </resources>
