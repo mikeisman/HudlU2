@@ -9,8 +9,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,9 +17,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -169,26 +164,4 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnAdapt
             dialog.show();
         }
     }
-
-    public void clickedFavorite(View view) {
-        RelativeLayout viewParentRow = (RelativeLayout)view.getParent();
-        /*
-
-        final int position = mRecyclerView.getChildLayoutPosition(viewParentRow);
-        MashableNewsItem mashableNewsItem = myDataset.get(position);
-
-        Button button = (Button)viewParentRow.getChildAt(1);
-
-        Button button = (Button)view;
-        final int position = mRecyclerView.getChildLayoutPosition(button);
-        MashableNewsItem mashableNewsItem = myDataset.get(position);
-
-
-        Log.d("Hudl U", "I clicked " + mashableNewsItem.title);
-        button.setText("Favorited");
-
-        viewParentRow.refreshDrawableState();
-        */
-    }
-
 }
